@@ -2,5 +2,5 @@
 .idea/
 __pycache__
 .texpadtmp/
-data/
-save/
+data
+save
