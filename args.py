@@ -113,6 +113,10 @@ def get_train_args():
                         type=float,
                         default=0.2,
                         help='Probability of zeroing an activation in dropout layers.')
+    parser.add_argument('--dropout_char',
+                        type=float,
+                        default=0.05,
+                        help='Probability of zeroing an activation in dropout layers.')
     parser.add_argument('--metric_name',
                         type=str,
                         default='F1',
@@ -134,8 +138,27 @@ def get_train_args():
                         type=float,
                         default=0.999,
                         help='Decay rate for exponential moving average of parameters.')
-
+    parser.add_argument('--char_dim',
+                        default=64,
+                        help='Embedding dimension for char')
+    parser.add_argument('--glove_dim',
+                        default=300,
+                        help='Embedding dimension for Glove')
+    parser.add_argument('--connector_dim',
+                        default=96,
+                        help='Dimension of connectors of each layer')
+    parser.add_argument('--num_heads',
+                        default=1,
+                        help='Number of heads in multi-head attention')
+    parser.add_argument('--para_limit',
+                        default=400,
+                        help='Limit length for paragraph')
+    parser.add_argument('--ques_limit',
+                        default=50,
+                        help='Limit length for question')
+    
     args = parser.parse_args()
+    args.dropout = drop_prob
 
     if args.metric_name == 'NLL':
         # Best checkpoint is the one that minimizes negative log-likelihood
